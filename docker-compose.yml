@@ -19,9 +19,13 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # Listeners for internal and external clients
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+      KAFKA_LOG_RETENTION_MS: 120000               # 2 minutes retention for all topics
+      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 1000 # check for expired logs every 1 second
+      KAFKA_LOG_SEGMENT_BYTES: 1048576            # 1 MB segments to force rolling
+      KAFKA_LOG_SEGMENT_MS: 60000                 # roll segments every 1 minute
