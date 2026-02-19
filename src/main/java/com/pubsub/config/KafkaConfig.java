@@ -9,12 +9,10 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 
 @Configuration
-@EnableKafka
 public class KafkaConfig {
 	@Bean
 	public ProducerFactory<String, String> producerFactory() {
@@ -23,7 +21,7 @@ public class KafkaConfig {
 		config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 		config.put(ProducerConfig.ACKS_CONFIG, "all");
-		config.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
+		config.put(ProducerConfig.RETRIES_CONFIG, 4);
 		config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
 
 		return new DefaultKafkaProducerFactory<>(config);
